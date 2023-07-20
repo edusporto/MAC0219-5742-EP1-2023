@@ -1,3 +1,5 @@
+#include <omp.h>
+
 #include "lga_base.h"
 #include "lga_omp.h"
 
@@ -27,7 +29,9 @@ static byte get_next_cell(int i, int j, byte *grid_in, int grid_size) {
 }
 
 static void update(byte *grid_in, byte *grid_out, int grid_size) {
+    #pragma omp parallel for
     for (int i = 0; i < grid_size; i++) {
+        // #pragma omp parallel for
         for (int j = 0; j < grid_size; j++) {
             if (grid_in[ind2d(i,j)] == WALL)
                 grid_out[ind2d(i,j)] = WALL;
@@ -38,6 +42,7 @@ static void update(byte *grid_in, byte *grid_out, int grid_size) {
 }
 
 void simulate_omp(byte *grid_1, byte *grid_2, int grid_size, int num_threads) {
+    omp_set_num_threads(num_threads);
     for (int i = 0; i < ITERATIONS/2; i++) {
         update(grid_1, grid_2, grid_size);
         update(grid_2, grid_1, grid_size);
