@@ -33,7 +33,7 @@ Os resultados dos experimentos podem ser observados no seguinte gráfico:
 
 ![Implementação *POSIX* threads](imgs/data_pth_10.png){ width=90% }
 
-
+Podemos ver que o tempo de execução caiu conforme aumentamos a quantidade de threads, estagnando com 4, já que o processador utilizado só possui 4 núcleos. É interessante notar que a queda em tempo de execução não seguiu uma proporção 1:1 com a quantidade de threads, isto é, aumentar as threads em 2x não fez o tempo cair em 2x. Isto pode ser explicado pelo overhead de paralelização e pelas partes sequenciais do programa que não se beneficiam da paralelização.
 
 # Implementação com *OpenMP*
 
@@ -41,4 +41,4 @@ Os resultados dos experimentos podem ser observados no seguinte gráfico:
 
 ![Implementação *OpenMP*](imgs/data_omp_10.png){ width=90% }
 
-# Conclusão
+Os resultados destes experimentos são muito semelhantes à implementação com *POSIX threads*.
